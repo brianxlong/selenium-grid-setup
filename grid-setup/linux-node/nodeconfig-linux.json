@@ -1,0 +1,29 @@
+{
+  "capabilities":
+      [
+        { 
+          "platform": "LINUX",
+          "browserName": "firefox",
+          "maxInstances": 5,
+          "seleniumProtocol": "WebDriver",
+	  "takesScreenshot": true
+        },
+        {
+          "platform": "LINUX",
+          "browserName": "chrome",
+          "maxInstances": 5,
+          "seleniumProtocol": "WebDriver"
+        }
+      ],
+  "configuration":
+  {
+    "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
+    "maxSession": 5,
+    "port": 5555,
+    "host": <this node's ip address>,
+    "register": true,
+    "registerCycle": 5000,
+    "hubPort": 4444,
+    "hubHost": <the hub's ip address>
+  }
+}

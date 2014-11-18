@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Grid Tests]">
+  <parameter name="oslist" value="MAC,WIN,LINUX,ANDROID,WIN8_1"/>
+  <parameter name="hub" value="http://your.hub.ip.addy"/>
+  <listeners>
+    <listener class-name="edu.vt.qav.tests.listeners.BaseTestListener"/>
+  </listeners>
+  <test name="Grid Connectivity(failed)" preserve-order="false">
+    <parameter name="oslist" value="MAC,WIN,LINUX,ANDROID,WIN8_1"/>
+    <parameter name="hub" value="http://your.hub.ip.addy"/>
+    <classes>
+      <class name="edu.vt.qav.tests.grid.RemoteTest">
+        <methods>
+          <include name="tearDown"/>
+          <include name="GridTest"/>
+          <include name="setUp"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>

@@ -1,0 +1,66 @@
+
+==========================
+selenium-grid-setup README
+==========================
+
+This project is designed to get a new grid up and running quickly so you can
+start testing!
+
+The grid-test subdirectory is pretty self-explanatory:
+
+Put the HUB directory on your hub (if your hub is a windows box, you'll need to
+rename the executable 'starthub' to something like 'starthub.cmd' and fix the
+link).
+
+ - Put the appropriate *-node directory/ies on your node/s along with the 
+   selenium-server-standalone-2.43.1.jar (or whichever version you're using... but
+   if you change it, change the links in the startup scripts to match).
+
+ - Update the JSON configs with the ip of your hub and the ip of each of your
+   nodes.
+
+ - Run ./starthub on the hub
+ - Run ./startnode-* on your nodes
+
+ - Done.  You have a grid.  You can check the connections from your browser at 
+   http://localhost:4444/grid/console on your hub machine.
+
+
+The grid-test directory contains a little startup test, too!
+
+Edit the RemoteTest.java file and update your email login info, or you'll get
+an exception (and no mail) after the test is done.
+
+ - For the grid-test to work you'll need maven:  run 'mvn clean install' from
+   the grid-test directory.
+ - Edit helpers/isgridup.sh with your correct path info.
+ - Edit src/main/resources/testng-grid.xml and enter your hub ip address.
+ - If you're on a windows box, change isgridup.sh to isgridup.cmd or something.
+ - Run helpers/isgridup.sh, and you should see your nodes all navigate to the QAV
+   website.
+
+
+This should get you up and running and building tests quickly on your new grid.
+
+
+A few more notes:
+
+The grid tries to be smart about where it runs tests.  It will check the
+os-list parameter defined in the testng-grid.xml first for which OSes you'd
+like to test on, then cross-references that with the attributes of the nodes
+that are actually connected to the hub.  So if there are nodes connected to the
+hub that aren't in the os-list, they won't get tests run on them.  
+
+I didn't implement the same cross-reference for browsers - the grid will
+attempt to run tests on all browsers registered from the node.
+
+RemoteTest.java also includes functionality that will send a screenshot via
+email.  You can extend BaseTestListener to call RemoteTest::screenShot() on a
+failure.  Caveat:  you might need to introduce a wait state there - Selenium
+is so fast that occasionally the screen is gone before it can be snapped.
+
+ENJOY!
+
+Brian Long
+Virginia Tech SETI QAV
+
