@@ -98,7 +98,7 @@ public class RemoteTest {
 
 	@Test(dataProvider = "webDriverList", threadPoolSize = 20)
 	public void GridTest(WebDriver wda) {
-		baseUrl = "www.seti.it.vt.edu/QAV/index.html";
+		baseUrl = "https://www.seti.it.vt.edu/QAV/index.html";
 		wda.get(baseUrl);
 		try {
 		  Thread.sleep(30000);  //show our webpage for a few seconds then go away
@@ -117,7 +117,7 @@ public class RemoteTest {
 			w.quit();
 		}
 		// this will fail until you update your email login info below
-		this.sendEmail(new File("./test-output/Grid Tests/index.html"));
+		this.sendEmail(new File("./test-output/emailable-report.html"));
 	}
 	
    // test will be run once for each set of parms
@@ -227,6 +227,7 @@ public class RemoteTest {
 		return true;
 	}
 	
+        // This one emails you a screenshot.
 	protected void screenShot (WebDriver wda){
 
 	    File screenshot = ((TakesScreenshot) wda).getScreenshotAs(OutputType.FILE);
