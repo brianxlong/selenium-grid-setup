@@ -82,13 +82,17 @@ public class RemoteTest {
 				    try {  // try to create a webdriver on every known browser
 						capability1 = browser;
 						capability1.setPlatform(p);
+						System.out.println("Attempting to create RemoteWebDriver with capability "	+ capability1.toString());
 						WebDriver wd = new RemoteWebDriver(
 								new URL(hub + ":4444/wd/hub"), capability1);
+						System.out.println("...success.  Attempting to augment RemoteWebDriver...");
 						WebDriver wda = new Augmenter().augment(wd);
+						System.out.println("...success.  Attempting to add wda to WebDriverList...");
 						webDriverList.add(wda);
-						System.out.println("Adding capability "	+ capability1.toString());
+						System.out.println("Capability " + capability1.toString() + " successfully added.");
 				    } catch (org.openqa.selenium.WebDriverException wde) {
 					    System.out.println("No node found with capability " + capability1.toString());
+					    wde.printStackTrace();
 				    }
 				}
 			}
@@ -98,7 +102,7 @@ public class RemoteTest {
 
 	@Test(dataProvider = "webDriverList", threadPoolSize = 20)
 	public void GridTest(WebDriver wda) {
-		baseUrl = "https://www.seti.it.vt.edu/QAV/index.html";
+		baseUrl = "http://www.seti.it.vt.edu/QAV/index.html";
 		wda.get(baseUrl);
 		try {
 		  Thread.sleep(30000);  //show our webpage for a few seconds then go away
