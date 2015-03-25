@@ -107,7 +107,7 @@ public class RemoteTest {
                     } catch (org.openqa.selenium.WebDriverException wde) {
                         System.out.println("No node found with capability "
                                 + capability1.toString());
-                        wde.printStackTrace();
+                        // wde.printStackTrace();
                     }
                 }
             }
@@ -115,12 +115,12 @@ public class RemoteTest {
         System.out.println("RemoteTest::setUp(): " + webDriverList.size()
                 + " clients.");
         if (webDriverList.size() == 0) {
-
+            throw new Exception("No items in WebDriverList!");
         }
     }
 
     @Test(dataProvider = "webDriverList", threadPoolSize = 20)
-    public void GridTest(WebDriver wda) {
+    private void GridTest(WebDriver wda) {
         baseUrl = "http://www.seti.it.vt.edu/QAV/index.html";
         wda.get(baseUrl);
         try {

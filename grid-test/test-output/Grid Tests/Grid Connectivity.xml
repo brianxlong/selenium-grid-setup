@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite hostname="qav-testing" name="edu.vt.qav.tests.grid.RemoteTest" tests="1" failures="1" timestamp="13 Nov 2014 20:22:17 GMT" time="0.003" errors="0">
-  <testcase name="GridTest" time="0.002" classname="edu.vt.qav.tests.grid.RemoteTest">
-    <failure type="java.lang.NullPointerException">
-      <![CDATA[java.lang.NullPointerException
-... Removed 19 stack frames]]>
-    </failure>
-  </testcase>
-</testsuite>
