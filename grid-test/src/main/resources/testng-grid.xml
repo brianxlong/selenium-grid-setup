@@ -2,7 +2,7 @@
  
 <suite name="Grid Tests" verbose="1" >
 
-  <parameter name="hub" value="http://your.hub.ip.addy"/>
+  <parameter name="hub" value="http://qav-selenium-hub.cc.vt.edu"/>
   
   <!-- these values should match DesiredCapabilities for your nodes -->
   <parameter name="oslist" value="MAC,WIN,LINUX,ANDROID,WIN8_1"/>
