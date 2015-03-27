@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -39,6 +40,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import org.testng.log4testng.Logger;
 
 /*
  * This test is the base class for all Grid tests.
@@ -55,8 +57,10 @@ import org.testng.annotations.Test;
  */
 public class RemoteTest {
 
-    protected String                 TEST_CLASS      = this.getClass()
+    protected String                 TEST_CLASS_NAME = this.getClass()
                                                              .getCanonicalName();
+    protected Logger                 logger          = Logger.getLogger(this
+                                                             .getClass());
     protected DesiredCapabilities    capability1;
     protected static String          hub;
     protected boolean                acceptNextAlert = true;
@@ -65,9 +69,10 @@ public class RemoteTest {
     protected String                 baseUrl;
 
     @BeforeSuite
-    @Parameters({ "hub", "oslist" })
+    @Parameters({ "hub", "oslist", "browserlist" })
     // defined in resources/testng.xml
-    public void setUp(String hub, String oslist) throws Exception {
+    public void setUp(String hub, String oslist, String browserlist)
+            throws Exception {
 
         // why isn't there an iterator for DesiredCapabilities?
         List<DesiredCapabilities> browserList = new ArrayList<DesiredCapabilities>();
@@ -83,11 +88,17 @@ public class RemoteTest {
 
         for (Platform p : Platform.values()) {
             if (!oslist.contains(p.name())) {
-                System.out.println("os-list does not contain " + p.name());
+                System.out.println("oslist does not contain " + p.name());
                 continue;
             } else {
                 for (DesiredCapabilities browser : browserList) {
-                    try { // try to create a webdriver on every known browser
+                    if (!browserlist.contains(browser.getBrowserName())) {
+                        System.out.println("browserlist does not contain "
+                                + browser.getBrowserName());
+                        continue;
+                    }
+                    try { // try to create a webdriver on every browser in
+                          // browserlist
                         capability1 = browser;
                         capability1.setPlatform(p);
                         System.out
@@ -95,6 +106,8 @@ public class RemoteTest {
                                         + capability1.toString());
                         WebDriver wd = new RemoteWebDriver(new URL(hub
                                 + ":4444/wd/hub"), capability1);
+                        wd.manage().timeouts()
+                                .implicitlyWait(30, TimeUnit.SECONDS);
                         System.out
                                 .println("...success.  Attempting to augment RemoteWebDriver...");
                         WebDriver wda = new Augmenter().augment(wd);
@@ -156,7 +169,7 @@ public class RemoteTest {
         return provider.iterator();
     }
 
-    private boolean isElementPresent(By by, WebDriver driver) {
+    protected boolean isElementPresent(By by, WebDriver driver) {
         try {
             driver.findElement(by);
             return true;
@@ -165,7 +178,7 @@ public class RemoteTest {
         }
     }
 
-    private boolean isAlertPresent(WebDriver driver) {
+    protected boolean isAlertPresent(WebDriver driver) {
         try {
             driver.switchTo().alert();
             return true;
@@ -174,10 +187,11 @@ public class RemoteTest {
         }
     }
 
-    private String closeAlertAndGetItsText(WebDriver driver) {
+    protected String closeAlertAndGetItsText(WebDriver driver) {
+        String alertText = "No Alert / No Text";
         try {
             Alert alert = driver.switchTo().alert();
-            String alertText = alert.getText();
+            alertText = alert.getText();
             if (acceptNextAlert) {
                 alert.accept();
             } else {
@@ -216,7 +230,7 @@ public class RemoteTest {
             message.setFrom(new InternetAddress("from@yourserver.com"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse("to@yourserver.com"));
-            message.setSubject("Test Results for " + TEST_CLASS);
+            message.setSubject("Test Results for " + TEST_CLASS_NAME);
 
             // Create the message part
             BodyPart messageBodyPart = new MimeBodyPart();
