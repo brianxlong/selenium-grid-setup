@@ -5,15 +5,19 @@
   <parameter name="hub" value="http://qav-selenium-hub.cc.vt.edu"/>
   
   <!-- these values should match DesiredCapabilities for your nodes -->
-  <parameter name="oslist" value="MAC,WIN,LINUX,ANDROID,WIN8_1"/>
+  <!-- MAC,VISTA,LINUX,ANDROID,WIN8_1 -->
+  <parameter name="oslist" value="MAC,VISTA,LINUX,ANDROID,WIN8_1"/>
+  <!-- firefox,safari,chrome,internet explorer -->
+  <parameter name="browserlist" value="firefox,safari,chrome,internet explorer"/>
+  <parameter name="versionlist" value=""/>
 
   <listeners>
     <listener class-name="edu.vt.qav.tests.listeners.BaseTestListener" />
   </listeners>
 
   <test name="Grid Connectivity"   >
-    <packages>
-      <package name="edu.vt.qav.tests.grid" />
-   </packages>
+    <classes>
+      <class name="edu.vt.qav.tests.grid.VerifyGrid" />
+   </classes>
  </test>
 </suite>

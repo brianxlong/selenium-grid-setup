@@ -51,8 +51,9 @@ like to test on, then cross-references that with the attributes of the nodes
 that are actually connected to the hub.  So if there are nodes connected to the
 hub that aren't in the os-list, they won't get tests run on them.  
 
-I didn't implement the same cross-reference for browsers - the grid will
-attempt to run tests on all browsers registered from the node.
+It will likewise only run tests on the browsers listed in the browser-list parameter.
+The version parameter is intended to allow the running of the same test on the same browser/os combination
+and was developed for the MAC, since it only has the one platform value.
 
 RemoteTest.java also includes functionality that will send a screenshot via
 email.  You can extend BaseTestListener to call RemoteTest::screenShot() on a
