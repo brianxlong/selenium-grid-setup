@@ -8,19 +8,18 @@ start testing!
 
 The grid-test subdirectory is pretty self-explanatory:
 
-Put the HUB directory on your hub (if your hub is a windows box, you'll need to
+Put the grid-setup/hub directory on your hub (if your hub is a windows box, you'll need to
 rename the executable 'starthub' to something like 'starthub.cmd' and fix the
 link).
 
- - Put the appropriate *-node directory/ies on your node/s along with the 
-   selenium-server-standalone-2.43.1.jar (or whichever version you're using... but
-   if you change it, change the links in the startup scripts to match).
+ - Put the appropriate grid-setup/*-node directory/ies on your node/s along with the 
+   selenium-server-standalone-<version>.jar (if you change the version, change the links in the startup scripts to match).
 
  - Update the JSON configs with the ip of your hub and the ip of each of your
    nodes.
 
- - Run ./starthub on the hub
- - Run ./startnode-* on your nodes
+ - Run grid-setup/starthub on the hub
+ - Run grid-setup/startnode-* on your nodes
 
  - Done.  You have a grid.  You can check the connections from your browser at 
    http://localhost:4444/grid/console on your hub machine.

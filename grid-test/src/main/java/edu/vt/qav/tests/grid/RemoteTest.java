@@ -90,7 +90,6 @@ public class RemoteTest {
         browserList.add(DesiredCapabilities.internetExplorer());
         browserList.add(DesiredCapabilities.ipad());
         browserList.add(DesiredCapabilities.iphone());
-        browserList.add(DesiredCapabilities.opera());
         browserList.add(DesiredCapabilities.safari());
 
         System.out.println("oslist:      " + oslist);
@@ -98,14 +97,14 @@ public class RemoteTest {
         System.out.println("versionlist: " + versionlist);
 
         // get intersection of all platforms with those requested
-        Set<String> platformNames = new HashSet();
+        Set<String> platformNames = new HashSet<String>();
         for (Platform p : Platform.values()) {
             System.out.println("add platform " + p.name());
             platformNames.add(p.name());
         }
         System.out.println("platformNames.size " + platformNames.size());
 
-        Set<String> configPlatforms = new HashSet();
+        Set<String> configPlatforms = new HashSet<String>();
         st = new StringTokenizer(oslist, ",");
         while (st.hasMoreTokens()) {
             configPlatforms.add(st.nextToken());
@@ -115,7 +114,7 @@ public class RemoteTest {
         System.out.println("platformNames.size " + platformNames.size());
 
         // get browser list
-        Set<String> configBrowsers = new HashSet();
+        Set<String> configBrowsers = new HashSet<String>();
         st = new StringTokenizer(browserlist, ",");
         while (st.hasMoreTokens()) {
             configBrowsers.add(st.nextToken());
@@ -148,11 +147,11 @@ public class RemoteTest {
                         st = new StringTokenizer(versionlist, ",");
                         while (st.hasMoreTokens()) {
                             capability1.setVersion(st.nextToken());
-                            CreateRemoteWebDriver(hub, capability1);
+                            createRemoteWebDriver(hub, capability1, true);
                         }
                     } else {
                         System.out.println("got no versions");
-                        CreateRemoteWebDriver(hub, capability1);
+                        createRemoteWebDriver(hub, capability1, true);
                     }
                 } catch (org.openqa.selenium.WebDriverException wde) {
                     System.out.println("No node found with capability "
@@ -168,8 +167,8 @@ public class RemoteTest {
         }
     }
 
-    protected void CreateRemoteWebDriver(String hub,
-            DesiredCapabilities capability1) {
+    protected WebDriver createRemoteWebDriver(String hub,
+            DesiredCapabilities capability1, boolean addToWDList) {
         System.out
                 .println("Attempting to create RemoteWebDriver with capability "
                         + capability1.toString());
@@ -180,17 +179,20 @@ public class RemoteTest {
             wd = new RemoteWebDriver(url, capability1);
         } catch (MalformedURLException e) {
             e.printStackTrace();
-            return;
+            return null;
         }
-        wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         System.out
                 .println("...success.  Attempting to augment RemoteWebDriver...");
         WebDriver wda = new Augmenter().augment(wd);
-        System.out
-                .println("...success.  Attempting to add wda to WebDriverList...");
-        webDriverList.add(wda);
+        if (addToWDList) {
+            System.out
+                    .println("...success.  Attempting to add wda to WebDriverList...");
+            webDriverList.add(wda);
+        }
         System.out.println("Capability " + capability1.toString()
                 + " successfully added.");
+        return wda;
     }
 
     @AfterSuite
@@ -222,6 +224,30 @@ public class RemoteTest {
         } catch (NoAlertPresentException e) {
             return false;
         }
+    }
+
+    protected String acceptAlert(WebDriver driver) {
+        String alertText = null;
+        try {
+            Alert alert = driver.switchTo().alert();
+            alertText = alert.getText();
+            alert.accept();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return alertText;
+    }
+
+    protected String dismissAlert(WebDriver driver) {
+        String alertText = null;
+        try {
+            Alert alert = driver.switchTo().alert();
+            alertText = alert.getText();
+            alert.dismiss();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return alertText;
     }
 
     protected String closeAlertAndGetItsText(WebDriver driver) {
