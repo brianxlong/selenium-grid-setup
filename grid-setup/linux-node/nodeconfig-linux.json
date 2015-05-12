@@ -20,10 +20,10 @@
     "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
     "maxSession": 5,
     "port": 5555,
-    "host": <this node's ip address>,
+    "host": ip,
     "register": true,
     "registerCycle": 5000,
     "hubPort": 4444,
-    "hubHost": <the hub's ip address>
+    "hubHost": <hub ip goes here>
   }
 }
