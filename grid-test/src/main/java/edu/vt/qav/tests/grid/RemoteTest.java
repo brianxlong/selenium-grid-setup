@@ -146,7 +146,7 @@ public class RemoteTest {
                 try { // try to create a webdriver on every browser in
                       // browserlist
                     capability1.setPlatform(Platform.valueOf(platform));
-                    if ((versionlist.length() > 0) && (platform.equals("MAC"))) {
+                    if ((versionlist.length() > 0) && (platform.equals("MAC"))) { // deprecated
                         System.out.println("got versions");
                         st = new StringTokenizer(versionlist, ",");
                         while (st.hasMoreTokens()) {
@@ -272,7 +272,7 @@ public class RemoteTest {
 
     protected boolean sendEmail(File file) {
         final String username = "b.shmoove@gmail.com";
-        final String password = "q1q1Q!Q!";
+        final String password = "";
 
         Properties props = new Properties();
 
@@ -296,7 +296,7 @@ public class RemoteTest {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("SeleniumGrid@vt.edu"));
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse("brian.long@vt.edu"));
+                    InternetAddress.parse("your.email@yourserver.com"));
             message.setSubject("Test Results for " + TEST_CLASS_NAME);
 
             // Create the message part
