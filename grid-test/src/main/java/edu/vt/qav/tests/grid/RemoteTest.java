@@ -50,12 +50,12 @@ import org.testng.log4testng.Logger;
  * 
  * Connects to the hub.
  * Creates augmented WebDrivers for screenshots.
- * Reads testng.xml for list of desired operating systems.
+ * Reads testng-grid.xml for list of desired operating systems.
  * Sends email.
  * 
  * We catch an exception if WebDriver creation fails.  
  * At the end we will have a set of WebDrivers that represents all 
- * registered nodes and browsers, further filtered by testng.xml
+ * registered nodes and browsers, further filtered by testng-grid.xml
  * to narrow down the target set, if desired.
  * 
  * q.v. "VerifyGrid.java" for the test that actually attempts to use
@@ -76,7 +76,7 @@ public class RemoteTest {
 
     @BeforeSuite
     @Parameters({ "hub", "oslist", "browserlist", "versionlist" })
-    // defined in resources/testng.xml
+    // defined in resources/testng-grid.xml
     public void setUp(String hub, String oslist, String browserlist,
             String versionlist) {
 
@@ -111,6 +111,10 @@ public class RemoteTest {
         }
         System.out.println("configPlatforms.size " + configPlatforms.size());
         platformNames.retainAll(configPlatforms);
+
+        for (Iterator<String> i = platformNames.iterator(); i.hasNext();) {
+            System.out.println("Keeping platform: " + i.next());
+        }
         System.out.println("platformNames.size " + platformNames.size());
 
         // get browser list
@@ -142,7 +146,7 @@ public class RemoteTest {
                 try { // try to create a webdriver on every browser in
                       // browserlist
                     capability1.setPlatform(Platform.valueOf(platform));
-                    if (versionlist.length() > 0) {
+                    if ((versionlist.length() > 0) && (platform.equals("MAC"))) {
                         System.out.println("got versions");
                         st = new StringTokenizer(versionlist, ",");
                         while (st.hasMoreTokens()) {
@@ -150,7 +154,7 @@ public class RemoteTest {
                             createRemoteWebDriver(hub, capability1, true);
                         }
                     } else {
-                        System.out.println("got no versions");
+                        System.out.println("got no versions for platform");
                         createRemoteWebDriver(hub, capability1, true);
                     }
                 } catch (org.openqa.selenium.WebDriverException wde) {
@@ -267,8 +271,8 @@ public class RemoteTest {
     }
 
     protected boolean sendEmail(File file) {
-        final String username = "brian.long@vt.edu";
-        final String password = "";
+        final String username = "b.shmoove@gmail.com";
+        final String password = "q1q1Q!Q!";
 
         Properties props = new Properties();
 
@@ -290,9 +294,9 @@ public class RemoteTest {
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("from@yourserver.com"));
+            message.setFrom(new InternetAddress("SeleniumGrid@vt.edu"));
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse("to@yourserver.com"));
+                    InternetAddress.parse("brian.long@vt.edu"));
             message.setSubject("Test Results for " + TEST_CLASS_NAME);
 
             // Create the message part
