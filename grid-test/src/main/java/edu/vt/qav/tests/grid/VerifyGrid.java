@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 public class VerifyGrid extends RemoteTest {
 
     @Test(dataProvider = "webDriverList", threadPoolSize = 20, groups = "grid")
-    private void GridTest(WebDriver wda) {
+    private void gridTest(WebDriver wda) {
         baseUrl = "http://www.seti.it.vt.edu/QAV/index.html";
         wda.get(baseUrl);
         try {

@@ -91,6 +91,7 @@ public class RemoteTest {
         browserList.add(DesiredCapabilities.ipad());
         browserList.add(DesiredCapabilities.iphone());
         browserList.add(DesiredCapabilities.safari());
+        browserList.add(DesiredCapabilities.edge());
 
         System.out.println("oslist:      " + oslist);
         System.out.println("browserList: " + browserlist);
