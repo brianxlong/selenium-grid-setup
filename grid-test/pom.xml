@@ -15,12 +15,20 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
+<<<<<<< HEAD
 			<version>2.52.0</version>
+=======
+			<version>2.53.0</version>
+>>>>>>> deb36563e120006a5b6d1e7e92e7c4c7e411f98f
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-server</artifactId>
+<<<<<<< HEAD
 			<version>2.52.0</version>
+=======
+			<version>2.53.0</version>
+>>>>>>> deb36563e120006a5b6d1e7e92e7c4c7e411f98f
 		</dependency>
 		<dependency>
 			<groupId>javax.mail</groupId>
