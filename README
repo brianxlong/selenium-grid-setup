@@ -6,6 +6,12 @@ selenium-grid-setup README
 This project is designed to get a new grid up and running quickly so you can
 start testing!
 
+Browser Drivers:
+http://chromedriver.storage.googleapis.com/index.html                 -- CHROME
+http://selenium-release.storage.googleapis.com/index.html?path=2.52/  -- IE
+https://msdn.microsoft.com/en-us/library/mt188085(v=vs.85).aspx       -- EDGE
+http://www.seleniumhq.org/download/                                   -- EVERYTHING ELSE
+
 The grid-test subdirectory is pretty self-explanatory:
 
 Put the grid-setup/hub directory on your hub (if your hub is a windows box, you'll need to
@@ -13,10 +19,11 @@ rename the executable 'starthub' to something like 'starthub.cmd' and fix the
 link).
 
  - Put the appropriate grid-setup/*-node directory/ies on your node/s along with the 
-   selenium-server-standalone-<version>.jar (if you change the version, change the links in the startup scripts to match).
+   selenium-server-standalone-<version>.jar (if you change the version, change the 
+   links in the startup scripts to match).
 
  - Update the JSON configs with the ip of your hub and the ip of each of your
-   nodes.
+   nodes (this is the important part).
 
  - Run grid-setup/starthub on the hub
  - Run grid-setup/startnode-* on your nodes
@@ -60,6 +67,7 @@ failure.  Caveat:  you might need to introduce a wait state there - Selenium
 is so fast that occasionally the screen is gone before it can be snapped.
 
 ENJOY!
+
 
 Brian Long
 Virginia Tech SETI QAV
