@@ -5,13 +5,15 @@
           "platform": "WIN8_1",
           "browserName": "internet explorer",
           "maxInstances": 5,
-          "seleniumProtocol": "WebDriver"
+          "seleniumProtocol": "WebDriver",
+          "version": "2"
         },
 		{
           "platform": "WIN8_1",
           "browserName": "chrome",
           "maxInstances": 5,
-          "seleniumProtocol": "WebDriver"
+          "seleniumProtocol": "WebDriver",
+          "version": "2"
         },
 
         {
@@ -19,6 +21,7 @@
           "browserName": "firefox",
           "maxInstances": 5,
           "seleniumProtocol": "WebDriver",
+          "version": "2",
 	  "takesScreenshot": true
         }
       ],
@@ -31,6 +34,6 @@
     "register": true,
     "registerCycle": 5000,
     "hubPort": 4444,
-    "hubHost": <insert your hub ip addy here>
+    "hubHost": 172.31.136.58
   }
 }

@@ -26,11 +26,11 @@
   {
     "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
     "maxSession": 5,
-    "host": ip,
+    "host": 128.173.38.138,
     "port": 5555,
     "register": true,
     "registerCycle": 5000,
     "hubPort": 4444,
-    "hubHost": <the hub's ip address>
+    "hubHost": roswell.seti.vt.edu
   }
 }
