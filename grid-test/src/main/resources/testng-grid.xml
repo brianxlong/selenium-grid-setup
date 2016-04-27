@@ -6,7 +6,7 @@
   <parameter name="send-email" value="yes"/>
   
   <!-- these values should match DesiredCapabilities for your nodes -->
-  <!-- MAC,VISTA,LINUX,ANDROID,WIN8_1,YOSEMITE,MAVERICKS,WIN10 -->
+  <!-- MAC,VISTA,LINUX,ANDROID,WIN8_1,YOSEMITE,MAVERICKS,WIN10,EL_CAPITAN -->
   <parameter name="oslist" value="WIN10,WIN8_1,MAC"/>
   <!-- firefox,safari,chrome,internet explorer -->
   <parameter name="browserlist" value="firefox,chrome,MicrosoftEdge,internet explorer,safari"/>
