@@ -12,6 +12,11 @@ http://selenium-release.storage.googleapis.com/index.html?path=2.52/  -- IE
 https://msdn.microsoft.com/en-us/library/mt188085(v=vs.85).aspx       -- EDGE
 http://www.seleniumhq.org/download/                                   -- EVERYTHING ELSE
 
+NOTE: The Safari driver is different from all the others (of course).  It's a
+manually-installed plugin.  Find it here:
+
+https://github.com/SeleniumHQ/selenium/wiki/SafariDriver
+
 The grid-test subdirectory is pretty self-explanatory:
 
 Put the grid-setup/hub directory on your hub (if your hub is a windows box, you'll need to
