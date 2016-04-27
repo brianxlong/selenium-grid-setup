@@ -140,23 +140,45 @@ public class RemoteTest {
         browserList.removeAll(killBrowsers);
         System.out.println("browserList.size " + browserList.size());
 
+        // get versions if there are any requested
+        // if versions are requested in the testng.xml, 
+        // they must be declared in the nodeconfig.json 
+        List<String>versionList = new ArrayList<String>();
+        if (versionlist.length() > 0) { 
+            System.out.println("got versions from testng.xml");
+            st = new StringTokenizer(versionlist, ",");
+            while (st.hasMoreTokens()) {
+            	versionList.add(st.nextToken());
+            }
+        } else {
+            System.out.println("got no versions from testng.xml");
+        }
+        
+        
         for (String platform : platformNames) {
             System.out.println("Platform = " + platform);
-            for (DesiredCapabilities browser : browserList) {
-                DesiredCapabilities capability1 = browser;
+            for (DesiredCapabilities capability1 : browserList) {
+                //DesiredCapabilities capability1 = browser;
                 try { // try to create a webdriver on every browser in
                       // browserlist
                     capability1.setPlatform(Platform.valueOf(platform));
-                    if ((versionlist.length() > 0) && (platform.equals("MAC"))) { // deprecated
-                        System.out.println("got versions");
-                        st = new StringTokenizer(versionlist, ",");
-                        while (st.hasMoreTokens()) {
-                            capability1.setVersion(st.nextToken());
-                            createRemoteWebDriver(hub, capability1, true);
+                    if (!versionList.isEmpty()) { 
+                       for (String version:versionList) {
+                    	   System.out.println("adding version: "+version);
+                           capability1.setVersion(version);
+                           try { 
+                             createRemoteWebDriver(hub, capability1, true);
+                           } catch (org.openqa.selenium.WebDriverException wde) {
+                        	   System.out.println("Failed to create versioned " + capability1.toString());  
+                           }
                         }
                     } else {
-                        System.out.println("got no versions for platform");
-                        createRemoteWebDriver(hub, capability1, true);
+                        System.out.println("no versions added");
+                        try {
+                          createRemoteWebDriver(hub, capability1, true);
+                        } catch (org.openqa.selenium.WebDriverException wde) {
+                        	System.out.println ("Failed to create nonversioned " + capability1.toString());
+                        }
                     }
                 } catch (org.openqa.selenium.WebDriverException wde) {
                     System.out.println("No node found with capability "

@@ -2,15 +2,15 @@
  
 <suite name="Grid Tests" verbose="1" >
 
-  <parameter name="hub" value="http://qav-selenium-hub.cc.vt.edu"/>
+  <parameter name="hub" value="http://localhost"/>
   <parameter name="send-email" value="yes"/>
   
   <!-- these values should match DesiredCapabilities for your nodes -->
-  <!-- MAC,VISTA,LINUX,ANDROID,WIN8_1,YOSEMITE,MAVERICKS -->
-  <parameter name="oslist" value="YOSEMITE,MAVERICKS,VISTA,LINUX,WIN8_1"/>
+  <!-- MAC,VISTA,LINUX,ANDROID,WIN8_1,YOSEMITE,MAVERICKS,WIN10 -->
+  <parameter name="oslist" value="WIN10,WIN8_1,MAC"/>
   <!-- firefox,safari,chrome,internet explorer -->
-  <parameter name="browserlist" value="firefox,safari,chrome,internet explorer"/>
-  <parameter name="versionlist" value=""/>
+  <parameter name="browserlist" value="firefox,chrome,MicrosoftEdge,internet explorer,safari"/>
+  <parameter name="versionlist" value="1,2,3"/>
 
   <listeners>
     <listener class-name="edu.vt.qav.tests.listeners.BaseTestListener" />

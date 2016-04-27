@@ -1,0 +1,36 @@
+{
+  "capabilities":
+      [
+        {
+          "platform": "WIN8_1",
+          "browserName": "internet explorer",
+          "maxInstances": 5,
+          "seleniumProtocol": "WebDriver"
+        },
+		{
+          "platform": "WIN8_1",
+          "browserName": "chrome",
+          "maxInstances": 5,
+          "seleniumProtocol": "WebDriver"
+        },
+
+        {
+          "platform": "WIN8_1",
+          "browserName": "firefox",
+          "maxInstances": 5,
+          "seleniumProtocol": "WebDriver",
+	  "takesScreenshot": true
+        }
+      ],
+  "configuration":
+  {
+    "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
+    "maxSession": 5,
+    "host": ip,
+    "port": 5555,
+    "register": true,
+    "registerCycle": 5000,
+    "hubPort": 4444,
+    "hubHost": ip
+  }
+}
