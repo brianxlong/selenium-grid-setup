@@ -34,6 +34,6 @@
     "register": true,
     "registerCycle": 5000,
     "hubPort": 4444,
-    "hubHost": 172.31.136.58
+    "hubHost": roswell.seti.vt.edu
   }
 }

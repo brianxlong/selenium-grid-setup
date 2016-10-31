@@ -1,0 +1,30 @@
+{
+  "capabilities":
+      [
+        {
+          "platform": "WIN8_1",
+          "browserName": "firefox",
+          "maxInstances": 5,
+          "seleniumProtocol": "WebDriver",
+          "takesScreenshot": true
+        },
+        {
+          "platform": "WIN8_1",
+          "browserName": "chrome",
+          "maxInstances": 5,
+          "seleniumProtocol": "WebDriver"
+        },
+	{
+          "platform": "WIN8_1",
+          "browserName": "internet_explorer",
+          "maxInstances": 5,
+          "seleniumProtocol": "WebDriver"
+        }
+      ],
+    "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
+    "maxSession": 5,
+    "port": 5555,
+    "register": true,
+    "registerCycle": 5000,
+    "hub": "http://roswell.seti.vt.edu:4444"
+}

@@ -1,1 +1,1 @@
-java -jar ..\selenium-server-standalone-2.52.0.jar -role node -nodeConfig nodeconfig-81.json -Dwebdriver.firefox.profile=default -Dwebdriver.ie.driver=IEDriverServer.exe -Dwebdriver.chrome.driver=chromedriver.exe
+java -jar ..\selenium-server-standalone-2.47.1.jar -role node -nodeConfig nodeconfig-81.json -Dwebdriver.firefox.profile=default -Dwebdriver.ie.driver=IEDriverServer.exe -Dwebdriver.chrome.driver=chromedriver.exe
